@@ -1,41 +1,43 @@
 <template>
-    <Page>
-        <ActionBar>
-            <Label text="Home"/>
-        </ActionBar>
-
-        <GridLayout>
-            <Label class="info">
-                <FormattedString>
-                    <Span class="fas" text.decode="&#xf135; "/>
-                    <Span :text="message"/>
-                </FormattedString>
-            </Label>
-        </GridLayout>
-    </Page>
+  <Page>
+    <ScrollView>
+      <FlexboxLayout flexDirection="column" class="homeContainer">
+        <HtmlView html="<div><h1>HOME</h1></div>" class="title" />
+        <HtmlView html="<div><h1>WELCOME,<br/>DANIEL</h1></div>" class="title" />
+        <Button text="ADD LEAD" class="btn-gold btn" @tap="nextPage"/>
+      </FlexboxLayout>
+    </ScrollView>
+  </Page>
 </template>
 
 <script>
-  export default {
-    computed: {
-      message() {
-        return "Blank {N}-Vue app";
-      }
-    }
-  };
+import Campaigns from "./Campaigns.vue"
+
+export default {
+  components: {
+    Campaigns
+  },
+  data() {
+    return {
+    };
+  },
+  methods: {
+    nextPage() {
+      this.$navigateTo(Campaigns);
+    },
+  },
+};
 </script>
 
-<style scoped lang="scss">
-    @import '@nativescript/theme/scss/variables/blue';
+<style lang="scss" scoped>
+.homeContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 
-    // Custom styles
-    .fas {
-        @include colorize($color: accent);
-    }
-
-    .info {
-        font-size: 20;
-        horizontal-align: center;
-        vertical-align: center;
-    }
+.btn {
+  margin-top: auto; /* This pushes the button to the bottom */
+}
 </style>
